@@ -7,25 +7,12 @@ import { WikipediaService } from './services/wikipedia.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  pages = [];
   constructor(private wikipediaService: WikipediaService) {}
 
   onTerm(term: string) {
-    this.wikipediaService.search(term).subscribe((response) => {
-      console.log(response);
+    this.wikipediaService.search(term).subscribe((response: any) => {
+      this.pages = response.query.search;
     });
   }
 }
-
-/*
-
-Test url:
-
-https://en.wikipedia.org/w/api.php?
-  action=query&
-  format=json&
-  list=search&
-  utf8=1&
-  srsearch=space
-
-
-*/
